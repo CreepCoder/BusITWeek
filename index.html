@@ -11,7 +11,10 @@
   <body>
     <header class="main-header">
       <h1><a href="../index.html">Simple Wars</a></h1>
-      <p>A turn based game - Take over towns to get money, spend money on units and defeat the enemy.</p>
+      <p>
+        A turn based game - Take over towns to get money, spend money on units
+        and defeat the enemy.
+      </p>
     </header>
 
     <div class="main-wrapper">
@@ -27,9 +30,14 @@
           </button>
         </div>
         <div id="player_actions_empty">
-          <button id="btn_placeUnit">
+          <button id="btn_placeUnit" onClick="btnPlace()">
             Place
           </button>
+          <div id="btns_unitPick">
+            <button id="btn_placeSoldier" class="unitpickers">Soldier</button>
+            <button id="btn_placeKnight" class="unitpickers">Knight</button>
+            <button id="btn_placeArcher" class="unitpickers">Archer</button>
+          </div>
         </div>
         <div id="player_actions_building">
           <button id="btn_city_Attack">
