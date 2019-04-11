@@ -17,12 +17,12 @@ var map = {
         1, 1, 1, 2, 1, 1, 1, 2, 4, 4, 4, 1, 2, 2, 2, 1,
         1, 1, 1, 2, 4, 4, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
         1, 2, 2, 2, 1, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,
-        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 3, 1,
-        2, 2, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 3, 1,
-        1, 3, 3, 3, 3, 3, 3, 1, 1, 3, 1, 1, 1, 1, 2, 2,
-        1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
+        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 5,
+        1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 3, 5,
+        2, 2, 1, 1, 1, 1, 3, 5, 5, 3, 3, 3, 3, 3, 3, 5,
+        5, 3, 3, 3, 3, 3, 3, 5, 5, 3, 1, 1, 1, 1, 2, 2,
+        5, 3, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1,
+        5, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
         2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 4, 1, 2, 2, 2, 1,
         1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 4, 4, 2, 1, 1, 1,
         1, 2, 2, 2, 1, 4, 4, 4, 2, 1, 1, 1, 2, 1, 1, 1,
@@ -45,6 +45,7 @@ Game.load = function () {
         Loader.loadImage('dirt', './assets/dirt.png'),
         Loader.loadImage('water', './assets/water.png'),
         Loader.loadImage('tree', './assets/tree.png'),
+        Loader.loadImage('bridge', './assets/bridge.png'),
         Loader.loadImage('selected', './assets/selected.png')
     ];
 };
@@ -55,6 +56,7 @@ Game.init = function () {
     this.dirt = Loader.getImage('dirt');
     this.water = Loader.getImage('water');
     this.tree = Loader.getImage('tree');
+    this.bridge = Loader.getImage('bridge');
     this.selected = Loader.getImage('selected');
 
     for (var c = 0; c < map.cols; c++) {
@@ -75,6 +77,10 @@ Game.init = function () {
                     break;
                 case 4:
                     newtile = new Tile(c, r, 4, false); 
+                    map.setTile(newtile, c, r);
+                    break;
+                case 5:
+                    newtile = new Tile(c, r, 5, false); 
                     map.setTile(newtile, c, r);
                     break;
             }
@@ -102,6 +108,9 @@ Game.render = function () {
                     break;
                 case 4:
                     this.ctx.drawImage(this.tree, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 5:
+                    this.ctx.drawImage(this.bridge, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
                     break;
             }
             
