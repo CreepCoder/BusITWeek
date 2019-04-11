@@ -1,19 +1,22 @@
 class Tile{
     constructor(x, y, type, occupied){
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.occupied = occupied;
+        this._x = x;
+        this._y = y;
+        this._type = type;
+        this._occupied = occupied;
     }
     
     get x (){
-    	return this.x;
+    	return this._x;
     }
 
     get y () {
-    	return this.y;
+    	return this._y;
     }
 
-}
+    get type () {
+    	return this._type;
+    }
+};
 
 
