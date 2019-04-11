@@ -40,24 +40,36 @@ var map = {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', './assets/tiles.png'),
-        Loader.loadImage('grass', './assets/grass.png'),
-        Loader.loadImage('dirt', './assets/dirt.png'),
-        Loader.loadImage('water', './assets/water.png'),
-        Loader.loadImage('tree', './assets/tree.png'),
-        Loader.loadImage('bridge', './assets/bridge.png'),
-        Loader.loadImage('selected', './assets/selected.png')
+        Loader.loadImage('tiles', './assets/tiles/grassTile.png'),
+        Loader.loadImage('grass', './assets/tiles/waterTile.png'),
+        Loader.loadImage('dirt', './assets/tiles/dirtTile.png'),
+		Loader.loadImage('bridge', './assets/tiles/bridgeTile.png'),
+		Loader.loadImage('tree', './assets/tiles/treeTile.png'),
+        Loader.loadImage('strongHold1', './assets/tiles/Stronghold1.png'),
+		Loader.loadImage('strongHold2', './assets/tiles/Stronghold2.png'),
+		Loader.loadImage('barracks1', './assets/tiles/Barracks1.png'),
+		Loader.loadImage('barracks2', './assets/tiles/Barracks2.png'),
+		Loader.loadImage('town0', './assets/tiles/Town0.png')
+		Loader.loadImage('town1', './assets/tiles/Town1.png'),
+		Loader.loadImage('town2', './assets/tiles/Town2.png'),
+		Loader.loadImage('selected', './assets/tiles/selected.png')
     ];
 };
 
 Game.init = function () {
-    this.tileAtlas = Loader.getImage('tiles');
-    this.grass = Loader.getImage('grass');
-    this.dirt = Loader.getImage('dirt');
-    this.water = Loader.getImage('water');
-    this.tree = Loader.getImage('tree');
-    this.bridge = Loader.getImage('bridge');
-    this.selected = Loader.getImage('selected');
+    this.grass = Loader.getImage('grassTile');
+    this.dirt = Loader.getImage('dirtTile');
+	this.water = Loader.getImage('waterTile');
+	this.bridge = Loader.getImage('bridgeTile');
+	this.tree = Loader.getImage('treeTile');
+	this.strongHold1 = Loader.getImage('Stronghold1');
+	this.strongHold2 = Loader.getImage('Stronghold2');
+	this.town0 = Loader.getImage('town0');
+	this.town1 = Loader.getImage('town1');
+	this.town2 = Loader.getImage('town2');
+	this.barracks1 = Loader.getImage('barracks1');
+	this.barracks2 = Loader.getImage('barracks2');
+	this.selected = Loader.getImage('selected');
 
     for (var c = 0; c < map.cols; c++) {
         for (var r = 0; r < map.rows; r++) {
