@@ -38,6 +38,37 @@ var map = {
     }
 };
 
+var unitmap = {
+    cols: 16,
+    rows: 16,
+    tsize: 50,
+    tiles: [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ],
+    getTile: function (col, row) {
+        return this.tiles[row * map.cols + col];
+    },
+
+    setTile: function (type, col, row) {
+        this.tiles[row * map.cols + col] = type;
+    }
+};
+
 Game.load = function () {
     return [
         Loader.loadImage('grass', './assets/tiles/grassTile.png'),
@@ -52,6 +83,7 @@ Game.load = function () {
 		Loader.loadImage('town0', './assets/tiles/Town0.png'),
 		Loader.loadImage('town1', './assets/tiles/Town1.png'),
 		Loader.loadImage('town2', './assets/tiles/Town2.png'),
+        Loader.loadImage('spear1', './assets/units/Spear1.png'),
 		Loader.loadImage('selected', './assets/tiles/selected.png')
     ];
 };
@@ -69,11 +101,14 @@ Game.init = function () {
 	this.town2 = Loader.getImage('town2');
 	this.barracks1 = Loader.getImage('barracks1');
 	this.barracks2 = Loader.getImage('barracks2');
+    this.spear1 = Loader.getImage('spear1');
 	this.selected = Loader.getImage('selected');
 
     for (var c = 0; c < map.cols; c++) {
         for (var r = 0; r < map.rows; r++) {
             var tile = map.getTile(c, r);
+            var unittile = unitmap.getTile(c, r);
+
             switch(tile) {
                 case 1:
                     newtile = new Tile(c, r, 1, false); 
@@ -123,6 +158,17 @@ Game.init = function () {
                     newtile = new Tile(c, r, 12, false); 
                     map.setTile(newtile, c, r);
                     break; 
+                case 13:
+                    newtile = new Tile(c, r, 13, false); 
+                    map.setTile(newtile, c, r);
+                    break; 
+            }
+
+            switch(unittile){
+                case 1:
+                    newunittile = new Tile(c, r, 1, false); 
+                    unitmap.setTile(newunittile, c, r);
+                    break; 
             }
         }
     }
@@ -132,9 +178,11 @@ Game.update = function (delta) {
 };
 
 Game.render = function () {
+    //this.ctx.drawImage(this.spear1, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
     for (var c = 0; c < map.cols; c++) {
         for (var r = 0; r < map.rows; r++) {
             var tile = map.getTile(c, r);
+            var unittile = unitmap.getTile(c, r);
 
             switch(tile.type) {
                 case 1:
@@ -178,6 +226,12 @@ Game.render = function () {
             if(tile.isSelected == true) {
                 //console.log(SELECTED); 
                 this.ctx.drawImage(this.selected, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+            }
+
+            switch(unittile.type) {
+                case 1:
+                    this.ctx.drawImage(this.spear1, c * unitmap.tsize, r * unitmap.tsize, unitmap.tsize, unitmap.tsize);
+                    break;
             }
         }
     }
