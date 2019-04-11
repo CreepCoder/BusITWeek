@@ -50,6 +50,8 @@ Game.load = function () {
     ];
 };
 
+/*
+
 for (var c = 0; c < map.cols; c++) {
     for (var r = 0; r < map.rows; r++) {
         var tile = map.getTile(c, r);
@@ -63,6 +65,7 @@ for (var c = 0; c < map.cols; c++) {
         }
     }
 }
+*/
 
 Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
