@@ -12,22 +12,22 @@ var map = {
     rows: 16,
     tsize: 50,
     tiles: [
-        1, 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1,
-        1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1
+        4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
+        4, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1,
+        1, 1, 1, 2, 1, 1, 1, 2, 4, 4, 4, 1, 2, 2, 2, 1,
+        1, 1, 1, 2, 4, 4, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+        1, 2, 2, 2, 1, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,
+        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 3, 1,
+        2, 2, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 3, 3, 3, 1,
+        1, 3, 3, 3, 3, 3, 3, 1, 1, 3, 1, 1, 1, 1, 2, 2,
+        1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
+        2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 4, 1, 2, 2, 2, 1,
+        1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 4, 4, 2, 1, 1, 1,
+        1, 2, 2, 2, 1, 4, 4, 4, 2, 1, 1, 1, 2, 1, 1, 1,
+        1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 4,
+        1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4
     ],
     getTile: function (col, row) {
         return this.tiles[row * map.cols + col];
@@ -43,6 +43,8 @@ Game.load = function () {
         Loader.loadImage('tiles', './assets/tiles.png'),
         Loader.loadImage('grass', './assets/grass.png'),
         Loader.loadImage('dirt', './assets/dirt.png'),
+        Loader.loadImage('water', './assets/water.png'),
+        Loader.loadImage('tree', './assets/tree.png'),
         Loader.loadImage('selected', './assets/selected.png')
     ];
 };
@@ -51,6 +53,8 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
     this.grass = Loader.getImage('grass');
     this.dirt = Loader.getImage('dirt');
+    this.water = Loader.getImage('water');
+    this.tree = Loader.getImage('tree');
     this.selected = Loader.getImage('selected');
 
     for (var c = 0; c < map.cols; c++) {
@@ -63,6 +67,14 @@ Game.init = function () {
                     break;
                 case 2:
                     newtile = new Tile(c, r, 2, false); 
+                    map.setTile(newtile, c, r);
+                    break;
+                case 3:
+                    newtile = new Tile(c, r, 3, false); 
+                    map.setTile(newtile, c, r);
+                    break;
+                case 4:
+                    newtile = new Tile(c, r, 4, false); 
                     map.setTile(newtile, c, r);
                     break;
             }
@@ -84,6 +96,12 @@ Game.render = function () {
                     break;
                 case 2:
                     this.ctx.drawImage(this.dirt, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 3:
+                    this.ctx.drawImage(this.water, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 4:
+                    this.ctx.drawImage(this.tree, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
                     break;
             }
             
