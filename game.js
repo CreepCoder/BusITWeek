@@ -1,41 +1,280 @@
 function include(url) {
-  
-  var sc = document.createElement('script');
+  var sc = document.createElement("script");
   sc.src = url;
   document.head.appendChild(sc);
 }
 
-include('Tile.js');
+include("Tile.js");
 
 var map = {
-    cols: 16,
-    rows: 16,
-    tsize: 50,
-    tiles: [
-        4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7,
-        4, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 12, 1, 2, 1,
-        1, 1, 10, 2, 1, 1, 1, 2, 4, 4, 4, 1, 2, 2, 2, 1,
-        1, 1, 1, 2, 4, 4, 8, 2, 1, 1, 1, 1, 2, 1, 2, 1,
-        12, 2, 2, 2, 1, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,
-        1, 2, 1, 1, 1, 1, 2, 1, 1, 8, 1, 1, 1, 1, 1, 5,
-        1, 2, 1, 8, 1, 1, 2, 2, 2, 1, 1, 1, 8, 1, 3, 5,
-        2, 2, 1, 1, 1, 1, 3, 5, 5, 3, 3, 3, 3, 3, 3, 5,
-        5, 3, 3, 3, 3, 3, 3, 5, 5, 3, 1, 1, 1, 1, 2, 2,
-        5, 3, 1, 8, 1, 1, 1, 2, 2, 2, 1, 1, 8, 1, 2, 1,
-        5, 1, 1, 1, 1, 1, 8, 1, 1, 2, 1, 1, 1, 1, 2, 1,
-        2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 4, 1, 2, 2, 2, 11,
-        1, 2, 1, 2, 1, 1, 1, 1, 2, 9, 4, 4, 2, 1, 1, 1,
-        1, 2, 2, 2, 1, 4, 4, 4, 2, 1, 1, 1, 2, 8, 1, 1,
-        1, 2, 1, 11, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 4,
-        6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4
-    ],
-    getTile: function (col, row) {
-        return this.tiles[row * map.cols + col];
-    },
+  cols: 16,
+  rows: 16,
+  tsize: 50,
+  tiles: [
+    4,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    7,
+    4,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    12,
+    1,
+    2,
+    1,
+    1,
+    1,
+    10,
+    2,
+    1,
+    1,
+    1,
+    2,
+    4,
+    4,
+    4,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    4,
+    4,
+    8,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    2,
+    1,
+    12,
+    2,
+    2,
+    2,
+    1,
+    4,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    2,
+    2,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    8,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5,
+    1,
+    2,
+    1,
+    8,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    8,
+    1,
+    3,
+    5,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    3,
+    5,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    5,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    5,
+    5,
+    3,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    5,
+    3,
+    1,
+    8,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    8,
+    1,
+    2,
+    1,
+    5,
+    1,
+    1,
+    1,
+    1,
+    1,
+    8,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    2,
+    2,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    4,
+    1,
+    2,
+    2,
+    2,
+    11,
+    1,
+    2,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    9,
+    4,
+    4,
+    2,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    4,
+    4,
+    4,
+    2,
+    1,
+    1,
+    1,
+    2,
+    8,
+    1,
+    1,
+    1,
+    2,
+    1,
+    11,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    4,
+    6,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    4
+  ],
+  getTile: function(col, row) {
+    return this.tiles[row * map.cols + col];
+  },
 
-    setTile: function (type, col, row) {
-        this.tiles[row * map.cols + col] = type;
-    }
+  setTile: function(type, col, row) {
+    this.tiles[row * map.cols + col] = type;
+  }
 };
 
 var unitmap = {
@@ -172,10 +411,10 @@ Game.init = function () {
             }
         }
     }
+  }
 };
 
-Game.update = function (delta) {
-};
+Game.update = function(delta) {};
 
 Game.render = function () {
     //this.ctx.drawImage(this.spear1, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
@@ -235,26 +474,38 @@ Game.render = function () {
             }
         }
     }
+  }
 };
 
 var lastTile;
 
 // Functions
-const klik = (event) => {
-    var canvas = document.getElementById('demo');
-    var rect = canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
-    console.log("x: " + Math.floor(x/50) + " y: " + Math.floor(y/50));
+const klik = event => {
+  var canvas = document.getElementById("demo");
+  var rect = canvas.getBoundingClientRect();
+  let x = event.clientX - rect.left;
+  let y = event.clientY - rect.top;
+  console.log("x: " + Math.floor(x / 50) + " y: " + Math.floor(y / 50));
 
-    if(lastTile != null) {
-        lastTile._selected = false;
-        console.log("Deselected lastTile"); 
-    }
+  if (lastTile != null) {
+    lastTile._selected = false;
+    console.log("Deselected lastTile");
+  }
 
-    currTile = map.getTile(Math.floor(x/50), Math.floor(y/50));
-    currTile._selected = true;
-    console.log(currTile); 
+  currTile = map.getTile(Math.floor(x / 50), Math.floor(y / 50));
+  currTile._selected = true;
+  console.log(currTile);
 
-    lastTile = currTile;
+  if (currTile.occupied == false) {
+    document.getElementById("player_actions_empty").style.visibility =
+      "visible";
+    document.getElementById("btns_unitPick").style.visibility = "hidden";
+  }
+  lastTile = currTile;
+};
+const btnPlace = function() {
+  document.getElementById("btns_unitPick").style.visibility = "visible";
+  document.getElementById("btn_placeUnit").style.visibility = "hidden";
+
+  console.log("allowing the player to choose a unit");
 };
