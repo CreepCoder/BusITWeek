@@ -12,22 +12,22 @@ var map = {
     rows: 16,
     tsize: 50,
     tiles: [
-        4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
-        4, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1,
-        1, 1, 1, 2, 1, 1, 1, 2, 4, 4, 4, 1, 2, 2, 2, 1,
-        1, 1, 1, 2, 4, 4, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
-        1, 2, 2, 2, 1, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,
-        1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 5,
-        1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 3, 5,
+        4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7,
+        4, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 12, 1, 2, 1,
+        1, 1, 10, 2, 1, 1, 1, 2, 4, 4, 4, 1, 2, 2, 2, 1,
+        1, 1, 1, 2, 4, 4, 8, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+        12, 2, 2, 2, 1, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,
+        1, 2, 1, 1, 1, 1, 2, 1, 1, 8, 1, 1, 1, 1, 1, 5,
+        1, 2, 1, 8, 1, 1, 2, 2, 2, 1, 1, 1, 8, 1, 3, 5,
         2, 2, 1, 1, 1, 1, 3, 5, 5, 3, 3, 3, 3, 3, 3, 5,
         5, 3, 3, 3, 3, 3, 3, 5, 5, 3, 1, 1, 1, 1, 2, 2,
-        5, 3, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 1,
-        5, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,
-        2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 4, 1, 2, 2, 2, 1,
-        1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 4, 4, 2, 1, 1, 1,
-        1, 2, 2, 2, 1, 4, 4, 4, 2, 1, 1, 1, 2, 1, 1, 1,
-        1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 4,
-        1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4
+        5, 3, 1, 8, 1, 1, 1, 2, 2, 2, 1, 1, 8, 1, 2, 1,
+        5, 1, 1, 1, 1, 1, 8, 1, 1, 2, 1, 1, 1, 1, 2, 1,
+        2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 4, 1, 2, 2, 2, 11,
+        1, 2, 1, 2, 1, 1, 1, 1, 2, 9, 4, 4, 2, 1, 1, 1,
+        1, 2, 2, 2, 1, 4, 4, 4, 2, 1, 1, 1, 2, 8, 1, 1,
+        1, 2, 1, 11, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 4,
+        6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4
     ],
     getTile: function (col, row) {
         return this.tiles[row * map.cols + col];
@@ -95,6 +95,34 @@ Game.init = function () {
                     newtile = new Tile(c, r, 5, false); 
                     map.setTile(newtile, c, r);
                     break;
+                case 6:
+                    newtile = new Tile(c, r, 6, false); 
+                    map.setTile(newtile, c, r);
+                    break;  
+                case 7:
+                    newtile = new Tile(c, r, 7, false); 
+                    map.setTile(newtile, c, r);
+                    break;   
+                case 8:
+                    newtile = new Tile(c, r, 8, false); 
+                    map.setTile(newtile, c, r);
+                    break;   
+                case 9:
+                    newtile = new Tile(c, r, 9, false); 
+                    map.setTile(newtile, c, r);
+                    break;           
+                case 10:
+                    newtile = new Tile(c, r, 10, false); 
+                    map.setTile(newtile, c, r);
+                    break;  
+                case 11:
+                    newtile = new Tile(c, r, 11, false); 
+                    map.setTile(newtile, c, r);
+                    break; 
+                case 12:
+                    newtile = new Tile(c, r, 12, false); 
+                    map.setTile(newtile, c, r);
+                    break; 
             }
         }
     }
@@ -123,6 +151,27 @@ Game.render = function () {
                     break;
                 case 5:
                     this.ctx.drawImage(this.bridge, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 6:
+                    this.ctx.drawImage(this.strongHold1, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 7:
+                    this.ctx.drawImage(this.strongHold2, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 8:
+                    this.ctx.drawImage(this.town0, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 9:
+                    this.ctx.drawImage(this.town1, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 10:
+                    this.ctx.drawImage(this.town2, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 11:
+                    this.ctx.drawImage(this.barracks1, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 12:
+                    this.ctx.drawImage(this.barracks2, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
                     break;
             }
             
