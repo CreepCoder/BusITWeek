@@ -1,12 +1,13 @@
-class Tile{
-    constructor(x, y, type, occupied){
+class Tile {
+    constructor(x, y, type, occupied) {
         this._x = x;
         this._y = y;
         this._type = type;
+        this._selected = false;
         this._occupied = occupied;
     }
     
-    get x (){
+    get x () {
     	return this._x;
     }
 
@@ -16,6 +17,10 @@ class Tile{
 
     get type () {
     	return this._type;
+    }
+
+    get isSelected () {
+        return this._selected;
     }
 };
 

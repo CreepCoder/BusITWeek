@@ -7,10 +7,6 @@ function include(url) {
 
 include('Tile.js');
 
-function defTile(type) {
-    let tile = new Tile(c, r, type, false); 
-}
-
 var map = {
     cols: 16,
     rows: 16,
@@ -46,7 +42,8 @@ Game.load = function () {
     return [
         Loader.loadImage('tiles', './assets/tiles.png'),
         Loader.loadImage('grass', './assets/grass.png'),
-        Loader.loadImage('dirt', './assets/dirt.png')
+        Loader.loadImage('dirt', './assets/dirt.png'),
+        Loader.loadImage('selected', './assets/selected.png')
     ];
 };
 
@@ -54,6 +51,7 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
     this.grass = Loader.getImage('grass');
     this.dirt = Loader.getImage('dirt');
+    this.selected = Loader.getImage('selected');
 
     for (var c = 0; c < map.cols; c++) {
         for (var r = 0; r < map.rows; r++) {
@@ -78,19 +76,26 @@ Game.update = function (delta) {
 Game.render = function () {
     for (var c = 0; c < map.cols; c++) {
         for (var r = 0; r < map.rows; r++) {
-            //var tileCurrent = tileList[r][c];
             var tile = map.getTile(c, r);
-            //console.log(tile);
-            if (tile.type == 1) {
-                this.ctx.drawImage(this.grass, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
-            }
 
-            if (tile.type == 2) {
-                this.ctx.drawImage(this.dirt, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+            switch(tile.type) {
+                case 1:
+                    this.ctx.drawImage(this.grass, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+                case 2:
+                    this.ctx.drawImage(this.dirt, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
+                    break;
+            }
+            
+            if(tile.isSelected == true) {
+                //console.log(SELECTED); 
+                this.ctx.drawImage(this.selected, c * map.tsize, r * map.tsize, map.tsize, map.tsize);
             }
         }
     }
 };
+
+var lastTile;
 
 // Functions
 const klik = (event) => {
@@ -99,6 +104,15 @@ const klik = (event) => {
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
     console.log("x: " + Math.floor(x/50) + " y: " + Math.floor(y/50));
-    newtile = new Tile(Math.floor(x/50), Math.floor(y/50), 2, false); 
-    map.setTile(newtile, Math.floor(x/50), Math.floor(y/50));
+
+    if(lastTile != null) {
+        lastTile._selected = false;
+        console.log("Deselected lastTile"); 
+    }
+
+    currTile = map.getTile(Math.floor(x/50), Math.floor(y/50));
+    currTile._selected = true;
+    console.log(currTile); 
+
+    lastTile = currTile;
 };
